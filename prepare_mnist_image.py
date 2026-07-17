@@ -26,7 +26,19 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    img = Image.open(args.image).convert("L")
+    image_path = Path(args.image)
+
+    if not image_path.exists():
+        raise FileNotFoundError(
+            f"Input image not found: {image_path}\n"
+            "Check the file name and extension. For example, use "
+            "'mnist_image.jpg' if your file is a JPEG, or 'mnist_image.png' if it is a PNG."
+        )
+    
+    if not image_path.is_file():
+        raise ValueError(f"Input path is not a file: {image_path}")
+    
+    img = Image.open(image_path).convert("L")
     img = img.resize((IMG_SIZE, IMG_SIZE), Image.Resampling.LANCZOS)
 
     pixels = np.asarray(img).astype(np.float32)
