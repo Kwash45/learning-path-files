@@ -33,7 +33,38 @@ class MNISTModel(nn.Module):
 
 model = MNISTModel()
 ModelUnderTest = model
-ModelInputs = (torch.zeros(1, 1, 28, 28, dtype=torch.float32),)
+
+def load_calibration_input():
+    path = "/home/developer/models/mnist_calibration/sample_0000.pt"
+    if not os.path.exists(path):
+        raise FileNotFoundError(
+            f"Missing calibration sample: {path}. "
+            "Download sample_0000.pt before exporting the quantized model."
+        )
+
+    x = torch.load(path, map_location="cpu")
+
+    if isinstance(x, (tuple, list)):
+        x = x[0]
+    if isinstance(x, dict):
+        x = next(v for v in x.values() if hasattr(v, "shape"))
+
+    x = x.to(dtype=torch.float32)
+
+    if x.ndim == 2:
+        x = x.unsqueeze(0).unsqueeze(0)
+    elif x.ndim == 3:
+        x = x.unsqueeze(0)
+
+    if x.max() > 3.0:
+        x = x / 255.0
+
+    if x.min() >= 0.0 and x.max() <= 1.0:
+        x = (x - 0.1307) / 0.3081
+
+    return x.contiguous()
+
+ModelInputs = (load_calibration_input(),)
 
 if os.environ.get("MNIST_LOAD_CHECKPOINT", "0") == "1":
     if not os.path.exists(CHECKPOINT_PATH):
