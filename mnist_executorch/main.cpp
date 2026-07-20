@@ -21,8 +21,8 @@
 #include "assets/input_mnist.h"
 #include "assets/mnist_model_data.h"
 
-#define mnist_model_data _home_developer_output_mnist_ethos_u85_pte
-#define mnist_model_len _home_developer_output_mnist_ethos_u85_pte_len
+#define mnist_model_data mnist_ethos_u85_pte
+#define mnist_model_len mnist_ethos_u85_pte_len
 
 /* GPIO drivers for DevKit-E8 LEDRGB0. */
 extern ARM_DRIVER_GPIO ARM_Driver_GPIO_(BOARD_LEDRGB0_R_GPIO_PORT);
