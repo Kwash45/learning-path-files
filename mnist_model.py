@@ -39,7 +39,7 @@ def load_calibration_input():
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"Missing calibration sample: {path}. "
-            "Download sample_0000.pt before exporting the quantized model."
+            "Download sample_one.pt before exporting the quantized model."
         )
 
     x = torch.load(path, map_location="cpu")
