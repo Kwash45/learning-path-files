@@ -35,7 +35,7 @@ model = MNISTModel()
 ModelUnderTest = model
 
 def load_calibration_input():
-    path = "/home/developer/models/mnist_calibration/sample_0000.pt"
+    path = "/home/developer/output/sample_one.pt"
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"Missing calibration sample: {path}. "
