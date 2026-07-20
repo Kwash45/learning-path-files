@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 /**
  * @file executorch_runner.cpp
- * @brief ExecuTorch MNIST runtime integration for Alif E8 M55-HE.
+ * @brief ExecuTorch MNIST runtime integration for Alif E8 M55-HP.
  */
 
 #include "RTE_Components.h"
@@ -30,6 +30,8 @@
 #include <executorch/runtime/executor/program.h>
 #include <executorch/runtime/platform/platform.h>
 #include <executorch/runtime/platform/runtime.h>
+
+#define NPU_HG_STATUS (*(volatile uint32_t *)(NPU_HG_BASE + 0x04))
 
 using namespace executorch::runtime;
 
@@ -163,7 +165,7 @@ int npu_init()
     }
 
     if (ethosu_init(&g_ethos_driver,
-                    reinterpret_cast<void*>(NPULOCAL_BASE),
+                    reinterpret_cast<void*>(NPU_HG_BASE),
                     0,
                     0,
                     1,
@@ -172,10 +174,9 @@ int npu_init()
         return -1;
     }
 
-    NVIC_EnableIRQ(NPULOCAL_IRQ_IRQn);
     g_npu_initialized = true;
-    printf("[ET] Ethos-U55 initialized at 0x%08lx\r\n",
-           static_cast<unsigned long>(NPULOCAL_BASE));
+    printf("[ET] Ethos-U85 initialized at 0x%08lx\r\n",
+           static_cast<unsigned long>(NPU_HG_BASE));
     return 0;
 }
 
@@ -294,9 +295,29 @@ int copy_output_tensor(const executorch::aten::Tensor& output_tensor, int8_t* ou
 
 } // namespace
 
-extern "C" void NPU_HE_IRQHandler(void)
+struct ethosu_sem_t {
+    uint8_t count;
+};
+
+extern "C" int ethosu_semaphore_take(void* sem, uint64_t timeout)
 {
-    ethosu_irq_handler(&g_ethos_driver);
+    (void)timeout;
+
+    ethosu_sem_t* s = static_cast<ethosu_sem_t*>(sem);
+
+    while (s->count == 0) {
+        if (NPU_HG_STATUS & 0x2U) {
+            ethosu_irq_handler(&g_ethos_driver);
+        }
+        __NOP();
+    }
+
+    s->count--;
+    return 0;
+}
+
+extern "C" void NPU_HP_IRQHandler(void)
+{
 }
 
 extern "C" {
