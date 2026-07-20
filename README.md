@@ -11,16 +11,18 @@ This repository is intended for education and demonstration only.
 
 Contents
 --------
-The ``mnist_executorch/`` directory contains the application source files used by the CMSIS project.
+
+The `mnist_executorch/ <mnist_executorch/>`_ directory contains the application
+source files used by the CMSIS project.
 
 The other files are supporting artifacts:
 
-* ``mnist_ethos_u85.pte``: pre-exported ExecuTorch MNIST model for Ethos-U85.
-* ``et_bundle.tar.gz``: A zipped folder of execuTorch headers and static libraries for the firmware build.
-* ``mnist_model.py``: PyTorch model definition used during export.
-* ``train_mnist.py``: A script for training the MNIST model.
-* ``sample_one.pt``: A representative calibration input used during quantized export.
-* ``prepare_mnist_image.py``: A helper script for converting a test digit image (in png or jpg) into a C header.
+* `mnist_ethos_u85.pte <mnist_ethos_u85.pte>`_: pre-exported ExecuTorch MNIST model for Ethos-U85.
+* `et_bundle.tar.gz <et_bundle.tar.gz>`_: compressed archive containing ExecuTorch headers and static libraries for the firmware build.
+* `mnist_model.py <mnist_model.py>`_: PyTorch model definition used during export.
+* `train_mnist.py <train_mnist.py>`_: script for training the MNIST model.
+* `sample_one.pt <sample_one.pt>`_: representative calibration input used during quantized export.
+* `prepare_mnist_image.py <prepare_mnist_image.py>`_: helper script for converting a PNG or JPEG digit image into a C header.
 
 Usage
 -----
