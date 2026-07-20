@@ -7,26 +7,10 @@ This directory contains support files for the Learning Path:
 
 The learning path provides instructions on how to run an MNIST digit-classification model with ExecuTorch on the Alif Ensemble E8 DevKit using the Arm Ethos-U85 NPU.
 
-This repository is intended for education and demonstration only. It does not contain production ready firmware, and it has not been hardened for safety, security, fault recovery, or long-running deployment.
+This repository is intended for education and demonstration only.
 
 Contents
 --------
-
-.. code-block:: text
-
-   .
-   ├── mnist_executorch/
-   │   ├── SEGGER_RTT_Conf.h
-   │   ├── executorch_runner.cpp
-   │   ├── executorch_runner.h
-   │   └── main.cpp
-   ├── et_bundle.tar.gz
-   ├── mnist_ethos_u85.pte
-   ├── mnist_model.py
-   ├── prepare_mnist_image.py
-   ├── sample_one.pt
-   └── train_mnist.py
-
 The ``mnist_executorch/`` directory contains the application source files used by the CMSIS project.
 
 The other files are supporting artifacts:
