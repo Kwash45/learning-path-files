@@ -3,7 +3,7 @@ MNIST ExecuTorch example for Alif Ensemble E8
 
 This directory contains support files for the Learning Path:
 
-``TODO: add Learning Path link``
+https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/
 
 The learning path provides instructions on how to run an MNIST digit-classification model with ExecuTorch on the Alif Ensemble E8 DevKit using the Arm Ethos-U85 NPU.
 
