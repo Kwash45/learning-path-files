@@ -15,12 +15,12 @@ The ``mnist_executorch/`` directory contains the application source files used b
 
 The other files are supporting artifacts:
 
-* ``mnist_ethos_u85.pte``: pre-exported ExecuTorch model for Ethos-U85.
-* ``et_bundle.tar.gz``: ExecuTorch headers and static libraries for the firmware build.
+* ``mnist_ethos_u85.pte``: pre-exported ExecuTorch MNIST model for Ethos-U85.
+* ``et_bundle.tar.gz``: A zipped folder of execuTorch headers and static libraries for the firmware build.
 * ``mnist_model.py``: PyTorch model definition used during export.
-* ``train_mnist.py``: script for training the MNIST model.
-* ``sample_one.pt``: representative calibration input used during quantized export.
-* ``prepare_mnist_image.py``: helper script for converting a test digit image into a C header.
+* ``train_mnist.py``: A script for training the MNIST model.
+* ``sample_one.pt``: A representative calibration input used during quantized export.
+* ``prepare_mnist_image.py``: A helper script for converting a test digit image (in png or jpg) into a C header.
 
 Usage
 -----
