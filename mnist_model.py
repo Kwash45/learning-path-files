@@ -48,21 +48,7 @@ def load_calibration_input():
         x = x[0]
     if isinstance(x, dict):
         x = next(v for v in x.values() if hasattr(v, "shape"))
-
-    x = x.to(dtype=torch.float32)
-
-    if x.ndim == 2:
-        x = x.unsqueeze(0).unsqueeze(0)
-    elif x.ndim == 3:
-        x = x.unsqueeze(0)
-
-    if x.max() > 3.0:
-        x = x / 255.0
-
-    if x.min() >= 0.0 and x.max() <= 1.0:
-        x = (x - 0.1307) / 0.3081
-
-    return x.contiguous()
+    return x.to(dtype=torch.float32).contiguous()
 
 ModelInputs = (load_calibration_input(),)
 
