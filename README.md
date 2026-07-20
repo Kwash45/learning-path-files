@@ -32,6 +32,4 @@ These files are not intended to be used as a standalone application without the 
 License
 -------
 
-This example is provided under the BSD-3-Clause-Clear license.
-
-See ``LICENSE.md`` for details.
+This repository uses the Arm Education End User License Agreement for teaching and learning content. See ``LICENSE.md`` for details.
